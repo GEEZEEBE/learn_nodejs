@@ -21,7 +21,7 @@ router.get('/external', function (req, res) {
 
 app.use('/', router);
 
-app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+app.listen(port, '0.0.0.0', () => console.log(`Example app listening on port ${port}!`))
 
 // var http = require('http');
 // //서버를 실행한다.
