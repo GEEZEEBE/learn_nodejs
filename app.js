@@ -19,6 +19,11 @@ router.get('/external', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/external.html'));
 });
 
+router.get('/detail', function (req, res) {
+    console.log(req.query);
+    res.send('Request parameters : '+req.query.email+', '+req.query.status)
+});
+
 app.use('/', router);
 
 app.listen(port, '0.0.0.0', () => console.log(`Example app listening on port ${port}!`))
