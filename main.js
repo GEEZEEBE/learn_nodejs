@@ -9,19 +9,27 @@ app.use(express.static('public'))
 const path = require('path');
 const router = express.Router();
 router.get('/', function (req, res) {
+    console.log(req.query);
     res.sendFile(path.join(__dirname + '/index.html'));
     //__dirname : It will resolve to your project folder.
 });
 router.get('/subview', function (req, res) {
+    console.log(req.query);
     res.sendFile(path.join(__dirname + '/views/subview.html'));
 });
 router.get('/external', function (req, res) {
+    console.log(req.query);
     res.sendFile(path.join(__dirname + '/views/external.html'));
 });
 
 router.get('/detail', function (req, res) {
     console.log(req.query);
     res.send('Request parameters : '+req.query.email+', '+req.query.status)
+});
+
+router.get('/cookies', function (req, res) {
+    console.log(req.query);
+    res.sendFile(path.join(__dirname + '/views/cookies.html'));
 });
 
 app.use('/', router);
