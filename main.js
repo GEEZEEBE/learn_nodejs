@@ -40,6 +40,19 @@ router.get('/ajaxget', function (req, res) {
     res.sendFile(path.join(__dirname + '/views/ajax_get.html'));
 });
 
+router.get('/ajax_restgetpost', function (req, res) {
+    console.log(req.query);
+    res.sendFile(path.join(__dirname + '/views/ajax_restgetpost.html'));
+});
+
+var request = require('request');
+router.get('/ajaxrestpost', function (req, res) {
+    request('http://openapi.epost.go.kr/postal/retrieveNewAdressAreaCdService/retrieveNewAdressAreaCdService/getNewAddressListAreaCd?serviceKey=BoygPZjC27pxm92hSposjnSob2u36vziS1rzIzxkrL9QxmlhB0SMARwLfNlBE3wrE7nnw34zLmmv0a6amvW4xg%3D%3D&searchSe=dong&srchwrd=%EC%A3%BC%EC%9B%94%EB%8F%99%20408-1&countPerPage=10&currentPage=1',
+        function (error, response, body) {
+            res.type('application/xml');
+            res.send(body)
+        });
+});
 // Rest API
 let tasksList = [
     {
