@@ -3,8 +3,11 @@ const app = express()
 const port = 3000
 
 // app.get('/', (req, res) => res.send('Hello World!'))
+var cors = require('cors');
+app.use(cors());
 
 app.use(express.static('public'))
+
 
 const path = require('path');
 const router = express.Router();
@@ -30,6 +33,57 @@ router.get('/detail', function (req, res) {
 router.get('/cookies', function (req, res) {
     console.log(req.query);
     res.sendFile(path.join(__dirname + '/views/cookies.html'));
+});
+
+router.get('/ajaxget', function (req, res) {
+    console.log(req.query);
+    res.sendFile(path.join(__dirname + '/views/ajax_get.html'));
+});
+
+// Rest API
+let tasksList = [
+    {
+        'id': 1,
+        'title': 'Buy groceries',
+        'description': 'Milk, Cheese, Pizza, Fruit, Tylenol', 
+        'done': 'False'
+    },
+    {
+        'id': 2,
+        'title': 'Learn Python',
+        'description': 'Need to find a good Python tutorial on the web', 
+        'done': 'False'
+    }
+];
+
+let tasksMap = {
+    'first' : {
+        'id': 1,
+        'title': 'Buy groceries',
+        'description': 'Milk, Cheese, Pizza, Fruit, Tylenol', 
+        'done': 'False'
+    },
+    'second' : {
+        'id': 2,
+        'title': 'Learn Python',
+        'description': 'Need to find a good Python tutorial on the web', 
+        'done': 'False'
+    }
+};
+
+router.get('/api/v1.0/tasks', function (req, res) {
+    console.log(req.query);
+    res.send(tasksList);
+});
+
+router.get('/api/v1.0/tasksList', function (req, res) {
+    console.log(req.query);
+    res.send(tasksList);
+});
+
+router.post('/api/v1.0/tasksMap', function (req, res) {
+    console.log(req.query);
+    res.send(tasksMap);
 });
 
 app.use('/', router);
